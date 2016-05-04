@@ -45,6 +45,7 @@
     "redbox-react": "^1.2.3",
     "transform-keys": "0.0.3",
     "webpack": "~1.12.15",
+    "url-loader": "^0.5.7",
     "react-slick": "^0.12.0",
     "scroll-into-view": "^1.6.0",
     "webpack-polyfills-plugin": "0.0.9"

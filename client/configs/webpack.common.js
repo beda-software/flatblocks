@@ -12,18 +12,22 @@ module.exports = {
         loaders: ['json'],
       },
       {
-        test: /\.(ico|gif|png|jpg|jpeg|svg|webp|eot|woff|ttf)$/,
+        test: /\.(ico|gif|png|jpg|jpeg|webp)$/,
         loaders: ['file?context=static&name=/[path][name].[ext]'],
         exclude: /node_modules/,
       },
       {
         test: /\.scss$/,
         loaders: [
-          'style-loader',
-          'css-loader?minimize',
-          'autoprefixer-loader',
-          'sass-loader?outputStyle=expanded&includePaths[]=' + (path.resolve(__dirname, './node_modules')),
+          'style',
+          'css?minimize',
+          'autoprefixer',
+          'sass?outputStyle=expanded&includePaths[]=' + (path.resolve(__dirname, './node_modules')),
         ],
+      },
+      {
+        test: /\.(eot|woff|woff2|svg|ttf)$/,
+        loader: 'url?limit=50000&name=[name].[ext]',
       },
     ],
     postLoaders: [
