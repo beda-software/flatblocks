@@ -13,6 +13,9 @@ serverConfig.entry.unshift(
 );
 
 serverConfig.output.publicPath = 'http://' + wdsHost + ':' + wdsPort + '/dist';
+serverConfig.watchOptions = {
+  poll: true,
+};
 
 serverConfig.plugins = [
   new webpack.ProvidePlugin({

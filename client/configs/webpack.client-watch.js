@@ -8,6 +8,9 @@ var wdsPort = config.get('FRONTEND_DEV_PORT');
 clientConfig.cache = true;
 clientConfig.debug = true;
 clientConfig.devtool = 'cheap-module-eval-source-map';
+clientConfig.watchOptions = {
+  poll: true,
+};
 
 clientConfig.entry.unshift(
   'webpack-dev-server/client?http://' + wdsHost + ':' + wdsPort,
