@@ -1,0 +1,28 @@
+from django.db import migrations, models
+
+
+def load_flatblocks(apps, schema_editor):
+    FlatBlock = apps.get_model("flatblocks", "flatblock")
+    {% for item in flatblock_list %}
+    block, created = FlatBlock.objects.get_or_create(slug='{{ item.slug }}')
+    block.show_header = {{ item.show_header }}
+    block.show_content = {{ item.show_content }}
+    block.show_file = {{ item.show_file }}
+    block.show_url = {{ item.show_url }}
+    block.set_linebreaks = {{ item.set_linebreaks }}
+    block.url = {% if item.url %}'{{ item.url }}'{% else %}''{% endif %}
+    block.file = {% if item.file %}'{{ item.file }}'{% else %}''{% endif %}
+    block.header = {% if item.header %}'{{ item.header }}'{% else %}''{% endif %}
+    block.content = {% if item.content %}'{% autoescape off %}{{ item.content }}{% endautoescape %}'{% else %}''{% endif %}
+    block.save()
+    {% endfor %}
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('flatblocks', '{{ prev_migration_filename }}'),
+    ]
+
+    operations = [
+        migrations.RunPython(load_flatblocks),
+    ]

@@ -1,0 +1,10 @@
+server:
+  volumes:
+  - ./server:/app/user
+
+client:
+  command: npm run watch
+  volumes:
+    - ./client/src:/app/user/src
+    - ./client/configs:/app/user/configs
+    - ./client/static:/app/user/static
