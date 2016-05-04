@@ -16,9 +16,14 @@ docker-compose run --rm server ./manage.py createsuperuser
 docker-compose up
 ```
 
-Server starts on http://localhost:3000 by default
+Frontend server starts on `http://localhost:3000` by default
 
-If you want another host, change it in docker-compose.override.yml environment:
+If you use another host (for example, across docker-machine), change it in `docker-compose.override.yml` environment:
 ```
 FRONTEND_DEV_HOST: '10.211.55.8'
 ```
+
+Backend server starts on `http://localhost:8000`
+Admin url is `http://localhost:8000/admin/`
+
+Also change appropriate constant settings in Admin panel (`FRONTEND_SITE_URL`, `BACKEND_SITE_URL`) for correct image displaying
