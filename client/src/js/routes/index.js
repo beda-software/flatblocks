@@ -1,6 +1,6 @@
 import React from 'react';
 import { SchemaBranchMixin } from 'baobab-react-mixins';
-import { ResolveMixin } from 'baobab-resolver';
+import { ResolveMixin } from 'baobab-react-resolver';
 import flatBlocksApi from 'api/flatblocks';
 import { DevToolbar } from 'components';
 

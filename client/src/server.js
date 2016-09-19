@@ -7,7 +7,7 @@ import convert from 'koa-convert';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { match as routerMatch, RouterContext } from 'react-router';
-import { renderToString } from 'js/baobab-resolver';
+import { renderToString } from 'baobab-react-resolver';
 import initialRoutes from 'js/routes/route';
 import config from '../configs/config';
 import RedBox from 'redbox-react';
@@ -46,13 +46,17 @@ try {
       const { reactString, initialTree } = await renderToString(
         <RouterContext {...renderProps} />);
 
+      const styleAsset = __PRODUCTION__ ?
+        `<link rel='stylesheet' href='${webserver + '/dist/client.css'}'>` : ``;
+
       ctx.type = 'text/html';
       ctx.body = (
         `<!doctype html>
         <html>
           <head>
             <meta charset="utf-8" />
-            <title>FlatBlocks</title>
+            <title>Stub Project</title>
+            ${styleAsset}
           </head>
           <body>
             <div id="react-root">${reactString}</div>

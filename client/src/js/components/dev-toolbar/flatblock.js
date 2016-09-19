@@ -1,6 +1,7 @@
 import React from 'react';
 import { BranchMixin } from 'baobab-react-mixins';
 import flatBlocksApi from 'api/flatblocks';
+import _ from 'lodash';
 
 export default React.createClass({
   displayName: 'FlatBlockDevToolbar',

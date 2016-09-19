@@ -1,6 +1,7 @@
 import axios from 'axios';
 import defaultsConfig from 'axios/lib/defaults';
 import transformKeys from 'transform-keys';
+import _ from 'lodash';
 
 function transformRequest(data) {
   if (data) {
@@ -18,19 +19,12 @@ function transformResponse(data) {
   return data;
 }
 
-function getDevURL() {
+function getBaseURL() {
   return __SERVER__ ? 'http://server:8000' : 'http://localhost:8000';
 }
 
-function getProductionURL() {
-  throw Exception('Set production URL');
-}
-
-const baseURL = __PRODUCTION__ ? getProductionURL() : getDevURL();
-
 const api = axios.create({
-  baseURL,
-  skipUnauthorized: false,
+  baseURL: getBaseURL(),
   timeout: 600000,
   headers: {},
   transformRequest: [transformRequest, defaultsConfig.transformRequest[0]],

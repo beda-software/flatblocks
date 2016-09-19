@@ -1,5 +1,6 @@
 import React from 'react';
 import FlatBlockCommonComponent from './common-component';
+import _ from 'lodash';
 
 export default React.createClass({
   displayName: 'FlatBlockComponent',

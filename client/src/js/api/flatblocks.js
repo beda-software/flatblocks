@@ -1,4 +1,5 @@
 import api from './index';
+import _ from 'lodash';
 
 export default {
   getList(cfg) {
