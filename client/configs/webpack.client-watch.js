@@ -6,8 +6,6 @@ var path = require('path');
 var wdsHost = config.get('FRONTEND_DEV_HOST');
 var wdsPort = config.get('FRONTEND_DEV_PORT');
 var nested = require('postcss-nested');
-var reporter = require('postcss-reporter');
-var stylelint = require('stylelint');
 
 var publicPath = 'http://' + wdsHost + ':' + wdsPort + '/dist';
 
@@ -58,8 +56,6 @@ var clientConfig = _.merge({}, commonConfig, {
   postcss: function () {
     return [
       nested,
-      stylelint,
-      reporter,
     ];
   },
 });
