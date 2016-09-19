@@ -1,23 +1,26 @@
 var _ = require('lodash');
 var webpack = require('webpack');
 var path = require('path');
-var PolyfillsPlugin = require('webpack-polyfills-plugin');
 var commonConfig = require('./webpack.common.js');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
+var nested = require('postcss-nested');
+var csso = require('postcss-csso');
 
-module.exports = _.merge({}, commonConfig, {
+var clientConfig = _.merge({}, commonConfig, {
   target: 'web',
   devtool: false,
-  entry: ['../src/client'],
+  entry: [
+    'babel-polyfill',
+    '../src/client',
+  ],
   output: {
     path: path.join(__dirname, '../static/dist'),
-    publicPath: '/dist',
     filename: 'client.js',
     chunkFilename: '[name].[id].js',
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      _: 'lodash',
-    }),
+    new ExtractTextPlugin('client.css', { allChunks: true }),
     new webpack.DefinePlugin({
       __CLIENT__: true,
       __SERVER__: false,
@@ -26,11 +29,24 @@ module.exports = _.merge({}, commonConfig, {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
+
     new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
-    new PolyfillsPlugin([
-      '_enqueueMicrotask',
-      'Promise',
-      'String/prototype/startsWith',
-    ]),
   ],
+  postcss: function () {
+    return [
+      nested,
+      autoprefixer,
+      csso,
+    ];
+  },
 });
+
+clientConfig.module.loaders.push({
+  test: /\.css/,
+  loader: ExtractTextPlugin.extract('style', [
+    'css?modules&importLoaders=1&localIdentName=[hash:base64:6]',
+    'postcss'
+  ]),
+});
+
+module.exports = clientConfig;

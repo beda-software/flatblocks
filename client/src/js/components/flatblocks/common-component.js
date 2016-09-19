@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import BaobabPropTypes from 'baobab-prop-types';
+import _ from 'lodash';
 
 export default React.createClass({
   displayName: 'FlatBlockCommonComponent',
@@ -36,7 +37,7 @@ export default React.createClass({
 
   render() {
     const cursor = this.context.flatBlockCursor;
-    
+
     return this.props.render(cursor.get() || {}, cursor);
   },
 });

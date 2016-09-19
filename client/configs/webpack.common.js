@@ -17,17 +17,8 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.scss$/,
-        loaders: [
-          'style',
-          'css?minimize',
-          'autoprefixer',
-          'sass?outputStyle=expanded&includePaths[]=' + (path.resolve(__dirname, './node_modules')),
-        ],
-      },
-      {
         test: /\.(eot|woff|woff2|svg|ttf)$/,
-        loader: 'url?limit=50000&name=[name].[ext]',
+        loader: 'url?limit=50000&name=/[name].[ext]',
       },
     ],
     postLoaders: [
@@ -48,11 +39,8 @@ module.exports = {
     alias: {
       api: path.resolve('./src/js/api/'),
       components: path.resolve('./src/js/components/'),
-
-      // TODO: Use baobab-react-resolver
-      'baobab-resolver': path.resolve('./src/js/baobab-resolver/'),
     },
-    extensions: ['', '.json', '.js', '.scss'],
+    extensions: ['', '.json', '.js', '.css'],
   },
   node: {
     __dirname: true,

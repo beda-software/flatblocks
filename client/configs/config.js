@@ -3,6 +3,8 @@ const path = require('path');
 
 nconf
   .file({
+    // TODO: .env file is broken
+    // TODO: use environment in docker-compose.override.yml
     file: '.env',
     format: nconf.formats.ini,
   })
